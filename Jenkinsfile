@@ -1,9 +1,14 @@
 pipeline{
     agent any
     stages{
-        stage("A"){
+        stage("Docker build "){
             steps{
-                echo "========executing A========"
+                sh 'docker build . -t news/app'
+            }
+        }
+        stage("Docker run "){
+            steps{
+                sh 'docker container run -d -p 3000:3000 news/app'
             }
         }
     }
